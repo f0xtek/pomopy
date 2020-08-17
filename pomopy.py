@@ -7,6 +7,7 @@ Allows you to focus using the Pomodoro technique.
 import time
 from datetime import datetime, timedelta
 from argparse import ArgumentParser
+from pomopy.notify import notify
 
 ROUNDS = 4
 TASK_LENGTH_MINUTES = 25
@@ -29,17 +30,17 @@ def pomodoro(task_length, short_break, long_break):
         timestamp = datetime.now()
         td = timedelta(seconds=task_length * 60)
         next_break = (timestamp + td).strftime(TIME_FORMAT)
-        print(f"{timestamp.strftime(TIME_FORMAT)} - Start work. Next break will be at {next_break}.")
+        notify(f"{timestamp.strftime(TIME_FORMAT)} - Start work. Next break will be at {next_break}.")
         time.sleep(task_length*60)
-        print(f"{datetime.now().strftime(TIME_FORMAT)} - Take a short break for {short_break} minutes!")
+        notify(f"{datetime.now().strftime(TIME_FORMAT)} - Take a short break for {short_break} minutes!")
         time.sleep(short_break*60)
     timestamp = datetime.now()
     td = timedelta(seconds=task_length * 60)
     next_break = (timestamp + td).strftime(TIME_FORMAT)
-    print(f"{timestamp.strftime(TIME_FORMAT)} - Start work. Next break will be at {next_break}.")
+    notify(f"{timestamp.strftime(TIME_FORMAT)} - Start work. Next break will be at {next_break}.")
     time.sleep(task_length*60)
-    print(f"{datetime.now().strftime(TIME_FORMAT)} - Time to take a break for {long_break} minutes!")
-    print(f"{datetime.now().strftime(TIME_FORMAT)} - Exiting!")
+    notify(f"{datetime.now().strftime(TIME_FORMAT)} - Time to take a break for {long_break} minutes!")
+    print(f"{datetime.now().strftime(TIME_FORMAT)} - Finished!")
 
 
 def main():
